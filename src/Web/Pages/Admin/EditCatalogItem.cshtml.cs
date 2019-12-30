@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.eShopWeb.ApplicationCore.Constants;
 using Microsoft.eShopWeb.Web.Interfaces;
 using Microsoft.eShopWeb.Web.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 namespace Microsoft.eShopWeb.Web.Pages.Admin
@@ -23,7 +24,10 @@ namespace Microsoft.eShopWeb.Web.Pages.Admin
 
         public async Task OnGet(CatalogItemViewModel catalogModel)
         {
-            CatalogModel = catalogModel;
+            await Task.Run(() =>
+            {
+                CatalogModel = catalogModel;
+            });
         }
 
         public async Task<IActionResult> OnPostAsync()
