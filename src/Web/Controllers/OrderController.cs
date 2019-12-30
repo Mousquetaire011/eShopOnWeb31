@@ -22,7 +22,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         [HttpGet()]
         public async Task<IActionResult> MyOrders()
         {
-            var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name));
+            var viewModel = await _mediator.Send(new GetMyOrders(User.Identity.Name)).ConfigureAwait(true);
 
             return View(viewModel);
         }
@@ -30,7 +30,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         [HttpGet("{orderId}")]
         public async Task<IActionResult> Detail(int orderId)
         {
-            var viewModel = await _mediator.Send(new GetOrderDetails(User.Identity.Name, orderId));
+            var viewModel = await _mediator.Send(new GetOrderDetails(User.Identity.Name, orderId)).ConfigureAwait(true);
 
             if (viewModel == null)
             {

@@ -27,14 +27,14 @@ namespace Microsoft.eShopWeb.Web.Pages.Admin
             await Task.Run(() =>
             {
                 CatalogModel = catalogModel;
-            });
+            }).ConfigureAwait(true);
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                await _catalogItemViewModelService.UpdateCatalogItem(CatalogModel);
+                await _catalogItemViewModelService.UpdateCatalogItem(CatalogModel).ConfigureAwait(true);
             }
 
             return RedirectToPage("/Admin/Index");

@@ -32,7 +32,7 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
 
         public async Task OnGet()
         {
-            await SetBasketModelAsync();
+            await SetBasketModelAsync().ConfigureAwait(true);
         }
 
         public async Task<IActionResult> OnPost(CatalogItemViewModel productDetails)
@@ -41,33 +41,33 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
             {
                 return RedirectToPage("/Index");
             }
-            await SetBasketModelAsync();
+            await SetBasketModelAsync().ConfigureAwait(true);
 
-            await _basketService.AddItemToBasket(BasketModel.Id, productDetails.Id, productDetails.Price);
+            await _basketService.AddItemToBasket(BasketModel.Id, productDetails.Id, productDetails.Price).ConfigureAwait(true);
 
-            await SetBasketModelAsync();
+            await SetBasketModelAsync().ConfigureAwait(true);
 
             return RedirectToPage();
         }
 
         public async Task OnPostUpdate(Dictionary<string, int> items)
         {
-            await SetBasketModelAsync();
-            await _basketService.SetQuantities(BasketModel.Id, items);
+            await SetBasketModelAsync().ConfigureAwait(true);
+            await _basketService.SetQuantities(BasketModel.Id, items).ConfigureAwait(true);
 
-            await SetBasketModelAsync();
+            await SetBasketModelAsync().ConfigureAwait(true);
         }
 
         private async Task SetBasketModelAsync()
         {
             if (_signInManager.IsSignedIn(HttpContext.User))
             {
-                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(User.Identity.Name);
+                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(User.Identity.Name).ConfigureAwait(true);
             }
             else
             {
                 GetOrSetBasketCookieAndUserName();
-                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(_username);
+                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(_username).ConfigureAwait(true);
             }
         }
 

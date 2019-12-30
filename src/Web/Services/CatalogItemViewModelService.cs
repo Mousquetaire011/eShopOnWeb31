@@ -18,14 +18,14 @@ namespace Microsoft.eShopWeb.Web.Services
         public async Task UpdateCatalogItem(CatalogItemViewModel viewModel)
         {
             //Get existing CatalogItem
-            var existingCatalogItem = await _catalogItemRepository.GetByIdAsync(viewModel.Id);
+            var existingCatalogItem = await _catalogItemRepository.GetByIdAsync(viewModel.Id).ConfigureAwait(true);
 
             //Build updated CatalogItem
             var updatedCatalogItem = existingCatalogItem;
             updatedCatalogItem.Name = viewModel.Name;
             updatedCatalogItem.Price = viewModel.Price;
 
-            await _catalogItemRepository.UpdateAsync(updatedCatalogItem);
+            await _catalogItemRepository.UpdateAsync(updatedCatalogItem).ConfigureAwait(true);
         }
     }
 }

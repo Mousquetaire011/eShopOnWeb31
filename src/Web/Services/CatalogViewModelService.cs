@@ -46,8 +46,8 @@ namespace Microsoft.eShopWeb.Web.Services
                 new CatalogFilterPaginatedSpecification(itemsPage * pageIndex, itemsPage, brandId, typeId);
 
             // the implementation below using ForEach and Count. We need a List.
-            var itemsOnPage = await _itemRepository.ListAsync(filterPaginatedSpecification);
-            var totalItems = await _itemRepository.CountAsync(filterSpecification);
+            var itemsOnPage = await _itemRepository.ListAsync(filterPaginatedSpecification).ConfigureAwait(true);
+            var totalItems = await _itemRepository.CountAsync(filterSpecification).ConfigureAwait(true);
 
             foreach (var itemOnPage in itemsOnPage)
             {
@@ -63,8 +63,8 @@ namespace Microsoft.eShopWeb.Web.Services
                     PictureUri = i.PictureUri,
                     Price = i.Price
                 }),
-                Brands = await GetBrands(),
-                Types = await GetTypes(),
+                Brands = await GetBrands().ConfigureAwait(true),
+                Types = await GetTypes().ConfigureAwait(true),
                 BrandFilterApplied = brandId ?? 0,
                 TypesFilterApplied = typeId ?? 0,
                 PaginationInfo = new PaginationInfoViewModel()
@@ -85,7 +85,7 @@ namespace Microsoft.eShopWeb.Web.Services
         public async Task<IEnumerable<SelectListItem>> GetBrands()
         {
             _logger.LogInformation("GetBrands called.");
-            var brands = await _brandRepository.ListAllAsync();
+            var brands = await _brandRepository.ListAllAsync().ConfigureAwait(true);
 
             var items = new List<SelectListItem>
             {
@@ -102,7 +102,7 @@ namespace Microsoft.eShopWeb.Web.Services
         public async Task<IEnumerable<SelectListItem>> GetTypes()
         {
             _logger.LogInformation("GetTypes called.");
-            var types = await _typeRepository.ListAllAsync();
+            var types = await _typeRepository.ListAllAsync().ConfigureAwait(true);
             var items = new List<SelectListItem>
             {
                 new SelectListItem() { Value = null, Text = "All", Selected = true }

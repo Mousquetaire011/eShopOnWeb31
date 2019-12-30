@@ -24,7 +24,7 @@ namespace Microsoft.eShopWeb.Web.Pages.Shared.Components.BasketComponent
         public async Task<IViewComponentResult> InvokeAsync(string userName)
         {
             var vm = new BasketComponentViewModel();
-            vm.ItemsCount = (await GetBasketViewModelAsync()).Items.Sum(i => i.Quantity);
+            vm.ItemsCount = (await GetBasketViewModelAsync().ConfigureAwait(true)).Items.Sum(i => i.Quantity);
             return View(vm);
         }
 
@@ -32,11 +32,11 @@ namespace Microsoft.eShopWeb.Web.Pages.Shared.Components.BasketComponent
         {
             if (_signInManager.IsSignedIn(HttpContext.User))
             {
-                return await _basketService.GetOrCreateBasketForUser(User.Identity.Name);
+                return await _basketService.GetOrCreateBasketForUser(User.Identity.Name).ConfigureAwait(true);
             }
             string anonymousId = GetBasketIdFromCookie();
             if (anonymousId == null) return new BasketViewModel();
-            return await _basketService.GetOrCreateBasketForUser(anonymousId);
+            return await _basketService.GetOrCreateBasketForUser(anonymousId).ConfigureAwait(true);
         }
 
         private string GetBasketIdFromCookie()

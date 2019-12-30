@@ -197,7 +197,7 @@ namespace Microsoft.eShopWeb.Web
                                 })
                             });
                         context.Response.ContentType = MediaTypeNames.Application.Json;
-                        await context.Response.WriteAsync(result);
+                        await context.Response.WriteAsync(result).ConfigureAwait(true);
                     }
                 });
             if (env.IsDevelopment())

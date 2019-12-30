@@ -24,8 +24,8 @@ namespace Microsoft.eShopWeb.Web.Services
             return await _cache.GetOrCreateAsync(CacheHelpers.GenerateBrandsCacheKey(), async entry =>
                     {
                         entry.SlidingExpiration = CacheHelpers.DefaultCacheDuration;
-                        return await _catalogViewModelService.GetBrands();
-                    });
+                        return await _catalogViewModelService.GetBrands().ConfigureAwait(true);
+                    }).ConfigureAwait(true);
         }
 
         public async Task<CatalogIndexViewModel> GetCatalogItems(int pageIndex, int itemsPage, int? brandId, int? typeId)
@@ -35,8 +35,8 @@ namespace Microsoft.eShopWeb.Web.Services
             return await _cache.GetOrCreateAsync(cacheKey, async entry =>
             {
                 entry.SlidingExpiration = CacheHelpers.DefaultCacheDuration;
-                return await _catalogViewModelService.GetCatalogItems(pageIndex, itemsPage, brandId, typeId);
-            });
+                return await _catalogViewModelService.GetCatalogItems(pageIndex, itemsPage, brandId, typeId).ConfigureAwait(true);
+            }).ConfigureAwait(true);
         }
 
         public async Task<IEnumerable<SelectListItem>> GetTypes()
@@ -44,8 +44,8 @@ namespace Microsoft.eShopWeb.Web.Services
             return await _cache.GetOrCreateAsync(CacheHelpers.GenerateTypesCacheKey(), async entry =>
             {
                 entry.SlidingExpiration = CacheHelpers.DefaultCacheDuration;
-                return await _catalogViewModelService.GetTypes();
-            });
+                return await _catalogViewModelService.GetTypes().ConfigureAwait(true);
+            }).ConfigureAwait(true);
         }
     }
 }

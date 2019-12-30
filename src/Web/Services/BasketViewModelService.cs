@@ -28,13 +28,13 @@ namespace Microsoft.eShopWeb.Web.Services
         public async Task<BasketViewModel> GetOrCreateBasketForUser(string userName)
         {
             var basketSpec = new BasketWithItemsSpecification(userName);
-            var basket = (await _basketRepository.ListAsync(basketSpec)).FirstOrDefault();
+            var basket = (await _basketRepository.ListAsync(basketSpec).ConfigureAwait(true)).FirstOrDefault();
 
             if (basket == null)
             {
-                return await CreateBasketForUser(userName);
+                return await CreateBasketForUser(userName).ConfigureAwait(true);
             }
-            return await CreateViewModelFromBasket(basket);
+            return await CreateViewModelFromBasket(basket).ConfigureAwait(true);
         }
 
         private async Task<BasketViewModel> CreateViewModelFromBasket(Basket basket)
@@ -42,14 +42,14 @@ namespace Microsoft.eShopWeb.Web.Services
             var viewModel = new BasketViewModel();
             viewModel.Id = basket.Id;
             viewModel.BuyerId = basket.BuyerId;
-            viewModel.Items = await GetBasketItems(basket.Items); ;
+            viewModel.Items = await GetBasketItems(basket.Items).ConfigureAwait(true); ;
             return viewModel;
         }
 
         private async Task<BasketViewModel> CreateBasketForUser(string userId)
         {
             var basket = new Basket() { BuyerId = userId };
-            await _basketRepository.AddAsync(basket);
+            await _basketRepository.AddAsync(basket).ConfigureAwait(true);
 
             return new BasketViewModel()
             {
@@ -71,7 +71,7 @@ namespace Microsoft.eShopWeb.Web.Services
                     Quantity = item.Quantity,
                     CatalogItemId = item.CatalogItemId
                 };
-                var catalogItem = await _itemRepository.GetByIdAsync(item.CatalogItemId);
+                var catalogItem = await _itemRepository.GetByIdAsync(item.CatalogItemId).ConfigureAwait(true);
                 itemModel.PictureUrl = _uriComposer.ComposePicUri(catalogItem.PictureUri);
                 itemModel.ProductName = catalogItem.Name;
                 items.Add(itemModel);

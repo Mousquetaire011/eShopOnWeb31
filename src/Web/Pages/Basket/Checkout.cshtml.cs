@@ -39,13 +39,13 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
 
         public async Task<IActionResult> OnPost(Dictionary<string, int> items)
         {
-            await SetBasketModelAsync();
+            await SetBasketModelAsync().ConfigureAwait(true);
 
-            await _basketService.SetQuantities(BasketModel.Id, items);
+            await _basketService.SetQuantities(BasketModel.Id, items).ConfigureAwait(true);
 
-            await _orderService.CreateOrderAsync(BasketModel.Id, new Address("123 Main St.", "Kent", "OH", "United States", "44240"));
+            await _orderService.CreateOrderAsync(BasketModel.Id, new Address("123 Main St.", "Kent", "OH", "United States", "44240")).ConfigureAwait(true);
 
-            await _basketService.DeleteBasketAsync(BasketModel.Id);
+            await _basketService.DeleteBasketAsync(BasketModel.Id).ConfigureAwait(true);
 
             return RedirectToPage();
         }
@@ -54,12 +54,12 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
         {
             if (_signInManager.IsSignedIn(HttpContext.User))
             {
-                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(User.Identity.Name);
+                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(User.Identity.Name).ConfigureAwait(true);
             }
             else
             {
                 GetOrSetBasketCookieAndUserName();
-                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(_username);
+                BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(_username).ConfigureAwait(true);
             }
         }
 

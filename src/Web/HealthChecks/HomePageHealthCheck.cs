@@ -23,8 +23,8 @@ namespace Microsoft.eShopWeb.Web.HealthChecks
             string myUrl = request.Scheme + "://" + request.Host.ToString();
 
             var client = new HttpClient();
-            var response = await client.GetAsync(myUrl);
-            var pageContents = await response.Content.ReadAsStringAsync();
+            var response = await client.GetAsync(myUrl).ConfigureAwait(true);
+            var pageContents = await response.Content.ReadAsStringAsync().ConfigureAwait(true);
             if (pageContents.Contains(".NET Bot Black Sweatshirt"))
             {
                 return HealthCheckResult.Healthy("The check indicates a healthy result.");

@@ -24,13 +24,13 @@ namespace Microsoft.eShopWeb.Web
                 try
                 {
                     var catalogContext = services.GetRequiredService<CatalogContext>();
-                    await CatalogContextSeed.SeedAsync(catalogContext, loggerFactory);
+                    await CatalogContextSeed.SeedAsync(catalogContext, loggerFactory).ConfigureAwait(true);
 
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                    await AppIdentityDbContextSeed.SeedAsync(userManager, roleManager);
+                    await AppIdentityDbContextSeed.SeedAsync(userManager, roleManager).ConfigureAwait(true);
                 }
-                catch (Exception ex)
+                catch (ApplicationException ex)
                 {
                     var logger = loggerFactory.CreateLogger<Program>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
