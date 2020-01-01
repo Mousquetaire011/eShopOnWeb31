@@ -386,6 +386,15 @@ namespace Microsoft.eShopWeb.Web.Controllers
             return View(model);
         }
 
+        private string GenerateQrCodeUri(string email, string unformattedKey)
+        {
+            return string.Format(
+                AuthenticatorUriFormat,
+                _urlEncoder.Encode("eShopOnWeb"),
+                _urlEncoder.Encode(email),
+                unformattedKey);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EnableAuthenticator(EnableAuthenticatorViewModel model)
@@ -488,13 +497,5 @@ namespace Microsoft.eShopWeb.Web.Controllers
             return result.ToString().ToLowerInvariant();
         }
 
-        private string GenerateQrCodeUri(string email, string unformattedKey)
-        {
-            return string.Format(
-                AuthenticatorUriFormat,
-                _urlEncoder.Encode("eShopOnWeb"),
-                _urlEncoder.Encode(email),
-                unformattedKey);
-        }
     }
 }
