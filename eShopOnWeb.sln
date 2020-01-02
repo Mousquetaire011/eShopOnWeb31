@@ -24,11 +24,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.yml = docker-compose.yml
 		README.md = README.md
+		README2.md = README2.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{227CF035-29B0-448D-97E4-944F9EA850E5}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1FCBE191-34FE-4B2E-8915-CA81553958AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlserver-linux", "sqlserver-linux", "{40506024-3D12-40C4-82A7-E6B1F7B8DEE9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\..\Windows\System32\cmd.exe = ..\..\..\..\..\..\Windows\System32\cmd.exe
+		src\sqlserver-linux\Dockerfile = src\sqlserver-linux\Dockerfile
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +82,7 @@ Global
 		{0F576306-7E2D-49B7-87B1-EB5D94CFD5FC} = {15EA4737-125B-4E6E-A806-E13B7EBCDCCF}
 		{7EFB5482-F942-4C3D-94B0-9B70596E6D0A} = {15EA4737-125B-4E6E-A806-E13B7EBCDCCF}
 		{227CF035-29B0-448D-97E4-944F9EA850E5} = {419A6ACE-0419-4315-A6FB-B0E63D39432E}
+		{40506024-3D12-40C4-82A7-E6B1F7B8DEE9} = {419A6ACE-0419-4315-A6FB-B0E63D39432E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49813262-5DA3-4D61-ABD3-493C74CE8C2B}
