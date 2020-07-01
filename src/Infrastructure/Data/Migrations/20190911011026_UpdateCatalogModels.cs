@@ -63,7 +63,6 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
-            migrationBuilder.Sql("CREATE TABLE `bankingoperations` (`idBankingOperations` int NOT NULL,`OperationLabel` varchar(255) DEFAULT NULL,`SalesId` int DEFAULT NULL,`ProductName` varchar(255) DEFAULT NULL,`SupplierName` varchar(255) DEFAULT NULL,`Price` double DEFAULT NULL,`Quantity` int DEFAULT NULL,`Credit` double DEFAULT NULL,`Debit` double DEFAULT NULL,`OperationDate` datetime DEFAULT NULL,`BankingDate` datetime DEFAULT NULL,PRIMARY KEY(`idBankingOperations`)); ");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
