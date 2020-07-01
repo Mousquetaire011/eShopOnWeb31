@@ -82,6 +82,51 @@ namespace Microsoft.eShopWeb.Web.Services
             return vm;
         }
 
+        public async Task<CatalogProductsViewModel> GetCatalogProducts(int pageIndex, int itemsPage, int? brandId, int? typeId)
+        {
+            _logger.LogInformation("GetCatalogItems called.");
+
+            var filterSpecification = new CatalogFilterSpecification(brandId, typeId);
+            var filterPaginatedSpecification =
+                new CatalogFilterPaginatedSpecification(itemsPage * pageIndex, itemsPage, brandId, typeId);
+
+            // the implementation below using ForEach and Count. We need a List.
+            var itemsOnPage = await _itemRepository.ListAsync(filterPaginatedSpecification).ConfigureAwait(true);
+            var totalItems = await _itemRepository.CountAsync(filterSpecification).ConfigureAwait(true);
+
+            foreach (var itemOnPage in itemsOnPage)
+            {
+                itemOnPage.PictureUri = _uriComposer.ComposePicUri(itemOnPage.PictureUri);
+            }
+
+            var vm = new CatalogProductsViewModel()
+            {
+                CatalogItems = itemsOnPage.Select(i => new CatalogItemViewModel()
+                {
+                    Id = i.Id,
+                    Name = i.Name,
+                    PictureUri = i.PictureUri,
+                    Price = i.Price
+                }),
+                Brands = await GetBrands().ConfigureAwait(true),
+                Types = await GetTypes().ConfigureAwait(true),
+                BrandFilterApplied = brandId ?? 0,
+                TypesFilterApplied = typeId ?? 0,
+                PaginationInfo = new PaginationInfoViewModel()
+                {
+                    ActualPage = pageIndex,
+                    ItemsPerPage = itemsOnPage.Count,
+                    TotalItems = totalItems,
+                    TotalPages = int.Parse(Math.Ceiling(((decimal)totalItems / itemsPage)).ToString())
+                }
+            };
+
+            vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
+            vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
+
+            return vm;
+        }
+
         public async Task<IEnumerable<SelectListItem>> GetBrands()
         {
             _logger.LogInformation("GetBrands called.");

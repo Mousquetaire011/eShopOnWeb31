@@ -39,6 +39,17 @@ namespace Microsoft.eShopWeb.Web.Services
             }).ConfigureAwait(true);
         }
 
+        public async Task<CatalogProductsViewModel> GetCatalogProducts(int pageIndex, int itemsPage, int? brandId, int? typeId)
+        {
+            var cacheKey = CacheHelpers.GenerateCatalogItemCacheKey(pageIndex, Constants.ITEMS_PER_PAGE, brandId, typeId);
+
+            return await _cache.GetOrCreateAsync(cacheKey, async entry =>
+            {
+                entry.SlidingExpiration = CacheHelpers.DefaultCacheDuration;
+                return await _catalogViewModelService.GetCatalogProducts(pageIndex, itemsPage, brandId, typeId).ConfigureAwait(true);
+            }).ConfigureAwait(true);
+        }
+
         public async Task<IEnumerable<SelectListItem>> GetTypes()
         {
             return await _cache.GetOrCreateAsync(CacheHelpers.GenerateTypesCacheKey(), async entry =>
