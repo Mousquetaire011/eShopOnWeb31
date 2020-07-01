@@ -1,4 +1,4 @@
-powershell
+ powershell
 docker --version
 
 docker pull mcr.microsoft.com/dotnet/core/aspnet:3.1
