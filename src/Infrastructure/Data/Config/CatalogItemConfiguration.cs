@@ -22,6 +22,11 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Config
                 .IsRequired(true)
                 .HasColumnType("decimal(18,2)");
 
+            builder.Property(ci => ci.Quantity)
+                .IsRequired(true)
+                .HasDefaultValue(10)
+                .HasColumnType("integer");
+
             builder.Property(ci => ci.PictureUri)
                 .IsRequired(false);
 

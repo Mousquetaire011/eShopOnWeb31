@@ -106,7 +106,8 @@ namespace Microsoft.eShopWeb.Web.Services
                     Id = i.Id,
                     Name = i.Name,
                     PictureUri = i.PictureUri,
-                    Price = i.Price
+                    Price = i.Price,
+                    Quantity = i.Quantity
                 }),
                 Brands = await GetBrands().ConfigureAwait(true),
                 Types = await GetTypes().ConfigureAwait(true),

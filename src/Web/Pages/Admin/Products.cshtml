@@ -26,20 +26,36 @@
     {
         <partial name="_pagination" for="CatalogModel.PaginationInfo" />
 
-        <div class="esh-catalog-items row">
-            @foreach (var catalogItem in Model.CatalogModel.CatalogItems)
-            {
-                <div class="esh-catalog-item col-md-4">
-                    <partial name="_editCatalog" for="@catalogItem" />
-                </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Picture</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var catalogItem in Model.CatalogModel.CatalogItems)
+                {
+                <tr>
+                    <td> <img src="@catalogItem.PictureUri" /> </td>
+                    <td>@catalogItem.Name</td>
+                    <td>@catalogItem.Price</td>
+                    <td>@catalogItem.Quantity</td>
+                    <td><a href="Admin/EditCatalogItem?id=5&name=Roslyn+Red+Sheet&pictureUri=%2Fimages%2Fproducts%2F5.png&price=8.5">Edit icon<a/></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+                
+            <partial name="_pagination" for="CatalogModel.PaginationInfo" />
             }
-        </div>
-        <partial name="_pagination" for="CatalogModel.PaginationInfo" />
-    }
-    else
-    {
-        <div class="esh-catalog-items row">
-            THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
-        </div>
-    }
+            else
+            {
+            <div class="esh-catalog-items row">
+                THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+            </div>
+            }
 </div>
