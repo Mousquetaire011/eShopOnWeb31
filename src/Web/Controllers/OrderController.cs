@@ -1,8 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.eShopWeb.ApplicationCore.Entities;
+using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
+using Microsoft.eShopWeb.Infrastructure.Data;
 using Microsoft.eShopWeb.Web.Features.MyOrders;
 using Microsoft.eShopWeb.Web.Features.OrderDetails;
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Microsoft.eShopWeb.Web.Controllers
@@ -13,10 +19,12 @@ namespace Microsoft.eShopWeb.Web.Controllers
     public class OrderController : Controller
     {
         private readonly IMediator _mediator;
-
-        public OrderController(IMediator mediator)
+        private DbContext _dbContext;
+        
+        public OrderController(IMediator mediator, CatalogContext catalogContext)
         {
             _mediator = mediator;
+            _dbContext = catalogContext;
         }
 
         [HttpGet()]
@@ -35,6 +43,20 @@ namespace Microsoft.eShopWeb.Web.Controllers
             if (viewModel == null)
             {
                 return BadRequest("No such order found for this user.");
+            }
+     
+            Console.WriteLine(_dbContext);
+            var order = _dbContext.Find<Order>(orderId);
+
+            Console.WriteLine(order);
+            
+            foreach (OrderItem item in order.OrderItems)
+            {
+                var update_quantity_item = _dbContext.Find<CatalogItem>(item.ItemOrdered.CatalogItemId);
+                Console.WriteLine(item);
+                update_quantity_item.Quantity -= item.Units;
+                await _dbContext.SaveChangesAsync().ConfigureAwait(false);
+                Console.WriteLine(update_quantity_item);
             }
 
             return View(viewModel);
