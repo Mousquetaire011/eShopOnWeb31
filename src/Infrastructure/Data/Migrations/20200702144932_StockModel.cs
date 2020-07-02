@@ -7,45 +7,66 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Suppliers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProductSuppliers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierID = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false)
+                    CatalogID = table.Column<int>(type: "int", nullable: true),
+                    SupplierID = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18, 2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProductSuppliers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductSuppliers_Catalog_CatalogID",
+                        column: x => x.CatalogID,
+                        principalTable: "Catalog",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductSuppliers_Suppliers_SupplierID",
+                        column: x => x.SupplierID,
+                        principalTable: "Suppliers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Stocks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<int>(nullable: false)
+                    CatalogID = table.Column<int>(type: "int", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stocks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stocks_Catalog_CatalogID",
+                        column: x => x.CatalogID,
+                        principalTable: "Catalog",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Suppliers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Suppliers", x => x.Id);
-                });
+         
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
