@@ -63,6 +63,9 @@
     <None Include="wwwroot\images\products\9.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="appsettings - Copier.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
