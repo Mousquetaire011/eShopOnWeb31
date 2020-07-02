@@ -3,57 +3,58 @@
 @{
     ViewData["Title"] = "Index";
 }
+ <div class="alert-info" style="padding: 40px">
+    <h2>FINANCIAL STATS</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-primary">New Operation</a>
+    </p>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.OperationLabel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Credit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Debit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OperationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BankingDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationLabel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Credit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Debit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OperationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BankingDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.OperationLabel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Debit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OperationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BankingDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OperationLabel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Debit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OperationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankingDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    </div>

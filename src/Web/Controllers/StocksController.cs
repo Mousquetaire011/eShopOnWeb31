@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.Infrastructure.Data;
+using Microsoft.eShopWeb.Web.ViewModels;
 
 namespace Microsoft.eShopWeb.Web.Controllers
 {
@@ -18,6 +20,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         {
             _context = context;
         }
+       
 
         // GET: Stocks
         public async Task<IActionResult> Index()
@@ -46,7 +49,8 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // GET: Stocks/Create
         public IActionResult Create()
         {
-            return View();
+           StockViewModel stocks = GetListItem();
+           return View(stocks);
         }
 
         // POST: Stocks/Create
@@ -54,7 +58,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Quantity,Buyprice,IsFull,Id")] Stock stock)
+        public async Task<IActionResult> Create([Bind("CatalogItemId,Quantity,Buyprice,IsFull,Id")] Stock stock)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +90,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Quantity,Buyprice,IsFull,Id")] Stock stock)
+        public async Task<IActionResult> Edit(int id, [Bind("CatalogItemId,Quantity,Buyprice,IsFull,Id")] Stock stock)
         {
             if (id != stock.Id)
             {
@@ -149,5 +153,23 @@ namespace Microsoft.eShopWeb.Web.Controllers
         {
             return _context.Stock.Any(e => e.Id == id);
         }
+        
+        public StockViewModel GetListItem()
+        {
+            var model = new StockViewModel();
+            model.stock = new Stock();
+            var items = _context.CatalogItems.OrderBy(N=>N.Name);
+            model.selectListItems = new List<SelectListItem>();
+            foreach (var item in items)
+            {
+                model.selectListItems.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                });
+            }
+            return model;
+        }
+
     }
 }

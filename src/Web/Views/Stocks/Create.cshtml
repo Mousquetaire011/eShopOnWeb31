@@ -1,45 +1,50 @@
-﻿@model Microsoft.eShopWeb.ApplicationCore.Entities.Stock
+﻿@model Microsoft.eShopWeb.Web.ViewModels.StockViewModel
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
-
-<h4>Stock</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Buyprice" class="control-label"></label>
-                <input asp-for="Buyprice" class="form-control" />
-                <span asp-validation-for="Buyprice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsFull" /> @Html.DisplayNameFor(model => model.IsFull)
-                    </label>
+<div class="alert-success" style="padding: 40px">
+    <h4>New Stock</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="@Model.stock.CatalogItem" class="control-label"></label>
+                    <select asp-for="@Model.stock.CatalogItem.Id" asp-items="@Model.selectListItems" class="form-control">
+                    </select>
+                    <span asp-validation-for="@Model.stock.CatalogItem" class="text-danger"></span>
                 </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <label asp-for="@Model.stock.Quantity" class="control-label"></label>
+                    <input asp-for="@Model.stock.Quantity" class="form-control" />
+                    <span asp-validation-for="@Model.stock.Quantity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.stock.Buyprice" class="control-label"></label>
+                    <input asp-for="@Model.stock.Buyprice" class="form-control" />
+                    <span asp-validation-for="@Model.stock.Buyprice" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="@Model.stock.IsFull" /> @Html.DisplayNameFor(model => model.stock.IsFull)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

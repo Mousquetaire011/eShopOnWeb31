@@ -1,4 +1,5 @@
 ﻿using Microsoft.eShopWeb.ApplicationCore.Interfaces;
+using System.Collections.Generic;
 
 namespace Microsoft.eShopWeb.ApplicationCore.Entities
 {

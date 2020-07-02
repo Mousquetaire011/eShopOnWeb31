@@ -1,5 +1,6 @@
 ﻿using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace Microsoft.eShopWeb.ApplicationCore.Entities
 {
@@ -11,4 +12,6 @@ namespace Microsoft.eShopWeb.ApplicationCore.Entities
         public double Buyprice { get; set; }
         public bool IsFull { get; set; } 
     }
+
+
 }
