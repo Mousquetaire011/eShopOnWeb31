@@ -160,7 +160,7 @@ namespace Microsoft.eShopWeb.Infrastructure.Data
         //{
         //    return new List<Stock>()
         //    {
-        //        new Stock() { CatalogItemId= 2, Quantity = 10},
+        //        new Stock() { Quantity = 10},
         //        new Stock() { CatalogItemId= 3, Quantity = 10},
         //        new Stock() { CatalogItemId= 4, Quantity = 10},
         //        new Stock() { CatalogItemId= 5, Quantity = 10},
@@ -173,6 +173,6 @@ namespace Microsoft.eShopWeb.Infrastructure.Data
         //        new Stock() { CatalogItemId= 12, Quantity = 4}
 
         //    };
-        //}
     }
-}
+    }
+

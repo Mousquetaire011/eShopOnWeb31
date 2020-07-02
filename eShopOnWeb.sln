@@ -33,7 +33,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sqlserver-linux", "sqlserver-linux", "{40506024-3D12-40C4-82A7-E6B1F7B8DEE9}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\..\Windows\System32\cmd.exe = ..\..\..\..\..\..\Windows\System32\cmd.exe
+		..\..\..\..\..\Windows\System32\cmd.exe = ..\..\..\..\..\Windows\System32\cmd.exe
 		src\sqlserver-linux\Dockerfile = src\sqlserver-linux\Dockerfile
 	EndProjectSection
 EndProject
@@ -68,7 +68,6 @@ Global
 		{227CF035-29B0-448D-97E4-944F9EA850E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{227CF035-29B0-448D-97E4-944F9EA850E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FCBE191-34FE-4B2E-8915-CA81553958AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FCBE191-34FE-4B2E-8915-CA81553958AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FCBE191-34FE-4B2E-8915-CA81553958AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FCBE191-34FE-4B2E-8915-CA81553958AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
