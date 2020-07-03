@@ -9,8 +9,9 @@ namespace Microsoft.eShopWeb.Web.ViewModels
 {
     public class BankingOperationViewModel
     {
-        public BankingOperations banking;
-        public List<SelectListItem> orders;
+        public BankingOperations bankingOperations { get; set; }
+
+        public List<SelectListItem> orders { get; set; }
         
     }
 }

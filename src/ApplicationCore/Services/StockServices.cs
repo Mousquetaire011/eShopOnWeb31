@@ -15,16 +15,15 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
         private readonly IAsyncRepository<CatalogItem> _itemRepository;
         public async Task SetStocksAfterOrder(int stockId, int orderId, int quantity)
         {
-         /*   var order = await _orderRepository.GetByIdAsync(orderId);
+            var order = await _orderRepository.GetByIdAsync(orderId);
+            var stocks = await _stockRepository.ListAllAsync();
             var items = new List<CatalogItem>();
             foreach (var item in order.OrderItems)
             {
-                var order = await _orderRepository.GetByIdAsync(orderId);
-                items.Add(orderItem);
+                
             }
-            var order = new Order(basket.BuyerId, shippingAddress, items);
-
-            await _orderRepository.AddAsync(order);*/
+       
+            await _orderRepository.AddAsync(order);
         }
     }
 }

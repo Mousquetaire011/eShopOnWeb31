@@ -158,6 +158,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         public BankingOperationViewModel GetListOrder()
         {
             var model = new BankingOperationViewModel();
+            model.bankingOperations = new BankingOperations();
             var items = _context.Orders.OrderBy(N => N.OrderDate);
             model.orders = new List<SelectListItem>();
             foreach (var item in items)
