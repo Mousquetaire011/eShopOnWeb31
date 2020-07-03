@@ -1,34 +1,35 @@
 ﻿@page
 @{
-    ViewData["Title"] = "Admin - Edit Catalog";
-    @model ProvidersModel
+    ViewData["Title"] = "Admin - Providers";
+    @model IEnumerable<ProvidersViewModel>
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <img class="esh-catalog-thumbnail" src="@Model.CatalogModel.PictureUri" />
-            <form method="post">
-                <div class="form-group">
-                    <label asp-for="CatalogModel.Name"></label>
-                    <input asp-for="CatalogModel.Name" class="form-control" />
-                    <span asp-validation-for="CatalogModel.Name"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CatalogModel.Price"></label>
-                    <input asp-for="CatalogModel.Price" class="form-control" />
-                    <span asp-validation-for="CatalogModel.Price"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="CatalogModel.Id"></label>
-                    <input asp-for="CatalogModel.Id" readonly class="form-control" />
-                    <span asp-validation-for="CatalogModel.Id"></span>
-                </div>
-                <div class="col-md-2">
-                    <input type="submit" value="Save" class="esh-catalog-button" />
-                </div>
-            </form>
-        </div>
+<div class="esh-orders">
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <article class="esh-orders-titles row">
+            <section class="esh-orders-title col-xs-2">Provider Name</section>
+            <section class="esh-orders-title col-xs-4">Provider Address</section>
+            <section class="esh-orders-title col-xs-2">Provider Siren</section>
+            <section class="esh-orders-title col-xs-2">Item for this provider</section>
+            <section class="esh-orders-title col-xs-2">Item PRICE for this provider (€)</section>
+            <section class="esh-orders-title col-xs-2">Item DELIVERY TIME for this provide (Days)r</section>
+            <section class="esh-orders-title col-xs-2"></section>
+        </article>
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+    <article class="esh-orders-items row">
+        <section class="esh-orders-item col-xs-2">@Html.DisplayFor(modelItem => item.Name)</section>
+        <section class="esh-orders-item col-xs-4">@Html.DisplayFor(modelItem => item.AddressNumber) @Html.DisplayFor(modelItem => item.AddressStreet) - @Html.DisplayFor(modelItem => item.AddressPostcode) @Html.DisplayFor(modelItem => item.AddressCity)</section>
+        <section class="esh-orders-item col-xs-2">$ @Html.DisplayFor(modelItem => item.Siren)</section>
+        <!-- Agregation de l'item du catalog (via la table de liaison CatalogHasProviders) DANS UN SECOND TEMPS
+
+    </section> -->
+    </article>
+            }
+        }
     </div>
 </div>
 

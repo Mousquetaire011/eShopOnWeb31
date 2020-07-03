@@ -22,3 +22,11 @@ dotnet restore
 dotnet tool restore
 dotnet ef database update -c catalogcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
 dotnet ef database update -c appidentitydbcontext -p ../Infrastructure/Infrastructure.csproj -s Web.csproj
+
+
+AGGREGATION A RAJOUTER DANS LES PROVIDERS UNE FOIS QUE CA MARCHE
+    <section class="esh-orders-item col-xs-2">@Html.DisplayFor(modelItem => item.ItemName)</section>
+    <section class="esh-orders-item col-xs-2">@Html.DisplayFor(modelItem => item.ItemPrice)</section>
+    <section class="esh-orders-item col-xs-2">@Html.DisplayFor(modelItem => item.ItemDelivery)</section>
+    <section class="esh-orders-item col-xs-1">
+        <a class="esh-orders-link" asp-controller="Order" asp-action="Detail" asp-route-orderId="@item.OrderNumber">Detail</a>
