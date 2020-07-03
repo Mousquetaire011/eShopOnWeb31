@@ -20,6 +20,8 @@ namespace Microsoft.eShopWeb.Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Provider> Providers { get; set; }
+        public DbSet<CatalogHasProviders> CatalogHasProviders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
