@@ -3,71 +3,75 @@
 @{
     ViewData["Title"] = "Index";
     double totalChiffreAffaire = 0;
+    double benefit = 0;
 }
- <div class="alert-info" style="padding: 40px">
-    <h2>FINANCIAL STATS</h2>
-    <p>
-        <a asp-action="Create" class="btn btn-primary">New Operation</a>
-    </p>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.OperationLabel)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Credit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Debit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OperationDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BankingDate)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OperationLabel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Credit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Debit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OperationDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BankingDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
-        @{
-            totalChiffreAffaire += item.Credit;
+    <div class="alert-info" style="padding: 40px">
+        <h2>FINANCIAL STATS</h2>
+        <p>
+            <a asp-action="Create" class="btn btn-primary">New Operation</a>
+        </p>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OperationLabel)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Credit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Debit)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OperationDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BankingDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationLabel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Credit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Debit)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankingDate)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                        @{
+                            totalChiffreAffaire += item.Credit;
+                            benefit += (item.Credit - item.Debit); 
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div style="display:flex; justify-content: space-around; width:100%">
+            <div class="badge" style="width: 25%">
+                <h2>Sales Turnover</h2>
+                <h3><strong>@totalChiffreAffaire</strong> € </h3>
+            </div>
+            <div class="badge" style="width: 25%">
+                <h2>Benefits</h2>
+                <h3><strong>@benefit</strong> € </h3>
+            </div>
+        </div>
 
-        }
-            </tr>
-    }
-        </tbody>
-    </table>
-    <div>
-        <h2>Chiffre d'Affaire</h2>
-        <h3><strong>@totalChiffreAffaire</strong> € </h3>
-    </div>
-
-    <div>
-        <h2>Bénéfice attendu</h2>
-        <h3><strong>@totalChiffreAffaire</strong> € </h3>
-    </div>
-    </div>
+        </div>
