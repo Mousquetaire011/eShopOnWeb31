@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Delete";
-    Layout = "~/Pages/Admin/EditCatalogItem.cshtml";
 }
 
 <h2>Delete</h2>
@@ -12,6 +11,18 @@
     <h4>Stock</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CatalogItem)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CatalogItem.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

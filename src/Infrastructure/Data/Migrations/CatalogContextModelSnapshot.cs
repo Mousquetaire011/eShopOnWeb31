@@ -186,7 +186,7 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CatalogID")
+                    b.Property<int?>("CatalogItemId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -195,10 +195,14 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupplierID")
+                    b.Property<int?>("SupplierId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogItemId");
+
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("ProductSuppliers");
                 });
@@ -213,10 +217,15 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                     b.Property<int>("CatalogId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CatalogItemId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogItemId");
 
                     b.ToTable("Stocks");
                 });
@@ -228,10 +237,15 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CatalogItemId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogItemId");
 
                     b.ToTable("Suppliers");
                 });
@@ -333,6 +347,31 @@ namespace Microsoft.eShopWeb.Infrastructure.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderItemId");
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.eShopWeb.ApplicationCore.Entities.ProductSupplier", b =>
+                {
+                    b.HasOne("Microsoft.eShopWeb.ApplicationCore.Entities.CatalogItem", "CatalogItem")
+                        .WithMany()
+                        .HasForeignKey("CatalogItemId");
+
+                    b.HasOne("Microsoft.eShopWeb.ApplicationCore.Entities.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId");
+                });
+
+            modelBuilder.Entity("Microsoft.eShopWeb.ApplicationCore.Entities.Stock", b =>
+                {
+                    b.HasOne("Microsoft.eShopWeb.ApplicationCore.Entities.CatalogItem", "CatalogItem")
+                        .WithMany()
+                        .HasForeignKey("CatalogItemId");
+                });
+
+            modelBuilder.Entity("Microsoft.eShopWeb.ApplicationCore.Entities.Supplier", b =>
+                {
+                    b.HasOne("Microsoft.eShopWeb.ApplicationCore.Entities.CatalogItem", "CatalogItem")
+                        .WithMany()
+                        .HasForeignKey("CatalogItemId");
                 });
 #pragma warning restore 612, 618
         }

@@ -139,20 +139,20 @@ namespace Microsoft.eShopWeb.Infrastructure.Data
         {
             return new List<ProductSupplier>()
             {
-                new ProductSupplier() { CatalogID = 2, SupplierID=1 , Price=6.5m , Quantity=5},
-                new ProductSupplier() { CatalogID = 2, SupplierID=2 , Price=7.5m , Quantity=5},
-                new ProductSupplier() { CatalogID = 3, SupplierID=3 , Price=10 , Quantity=10},
-                new ProductSupplier() { CatalogID = 4, SupplierID= 2, Price=9 , Quantity=10},
-                new ProductSupplier() { CatalogID = 5, SupplierID= 4, Price= 6, Quantity=10},
-                new ProductSupplier() { CatalogID = 6, SupplierID= 5, Price= 8, Quantity=6},
-                new ProductSupplier() { CatalogID = 6, SupplierID= 3, Price= 10, Quantity=4},
-                new ProductSupplier() { CatalogID = 7, SupplierID = 1 , Price = 6.5m , Quantity = 3},
-                new ProductSupplier() { CatalogID = 8, SupplierID=6 , Price=5.5m , Quantity=10},
-                new ProductSupplier() { CatalogID = 9, SupplierID=4 , Price=10 , Quantity=10},
-                new ProductSupplier() { CatalogID = 10, SupplierID= 7, Price=9 , Quantity=10},
-                new ProductSupplier() { CatalogID = 11, SupplierID= 7, Price= 6, Quantity=6},
-                new ProductSupplier() { CatalogID = 11, SupplierID= 5, Price= 7, Quantity=4},
-                new ProductSupplier() { CatalogID = 12, SupplierID= 6, Price= 10, Quantity=4}
+                new ProductSupplier() { CatalogItemId = 2, SupplierId=1 , Price=6.5m , Quantity=5},
+                new ProductSupplier() { CatalogItemId = 2, SupplierId=2 , Price=7.5m , Quantity=5},
+                new ProductSupplier() { CatalogItemId = 3, SupplierId=3 , Price=10 , Quantity=10},
+                new ProductSupplier() { CatalogItemId = 4, SupplierId= 2, Price=9 , Quantity=10},
+                new ProductSupplier() { CatalogItemId = 5, SupplierId= 4, Price= 6, Quantity=10},
+                new ProductSupplier() { CatalogItemId = 6, SupplierId= 5, Price= 8, Quantity=6},
+                new ProductSupplier() { CatalogItemId = 6, SupplierId= 3, Price= 10, Quantity=4},
+                new ProductSupplier() { CatalogItemId = 7, SupplierId = 1 , Price = 6.5m , Quantity = 3},
+                new ProductSupplier() { CatalogItemId = 8, SupplierId=6 , Price=5.5m , Quantity=10},
+                new ProductSupplier() { CatalogItemId = 9, SupplierId=4 , Price=10 , Quantity=10},
+                new ProductSupplier() { CatalogItemId = 10, SupplierId= 7, Price=9 , Quantity=10},
+                new ProductSupplier() { CatalogItemId = 11, SupplierId= 7, Price= 6, Quantity=6},
+                new ProductSupplier() { CatalogItemId = 11, SupplierId= 5, Price= 7, Quantity=4},
+                new ProductSupplier() { CatalogItemId = 12, SupplierId= 6, Price= 10, Quantity=4}
 
             };
         }
@@ -161,17 +161,17 @@ namespace Microsoft.eShopWeb.Infrastructure.Data
         {
             return new List<Stock>()
             {
-                new Stock() { CatalogID= 2, Quantity = 10},
-                new Stock() { CatalogID= 3, Quantity = 10},
-                new Stock() { CatalogID= 4, Quantity = 10},
-                new Stock() { CatalogID= 5, Quantity = 10},
-                new Stock() { CatalogID= 6, Quantity = 10},
-                new Stock() { CatalogID= 7, Quantity = 3},
-                new Stock() { CatalogID= 8, Quantity = 10},
-                new Stock() { CatalogID= 9, Quantity = 10},
-                new Stock() { CatalogID= 10, Quantity = 10},
-                new Stock() { CatalogID= 11, Quantity = 10},
-                new Stock() { CatalogID= 12, Quantity = 4}
+                new Stock() { CatalogItemId= 2, Quantity = 10},
+                new Stock() { CatalogItemId= 3, Quantity = 10},
+                new Stock() { CatalogItemId= 4, Quantity = 10},
+                new Stock() { CatalogItemId= 5, Quantity = 10},
+                new Stock() { CatalogItemId= 6, Quantity = 10},
+                new Stock() { CatalogItemId= 7, Quantity = 3},
+                new Stock() { CatalogItemId= 8, Quantity = 10},
+                new Stock() { CatalogItemId= 9, Quantity = 10},
+                new Stock() { CatalogItemId= 10, Quantity = 10},
+                new Stock() { CatalogItemId= 11, Quantity = 10},
+                new Stock() { CatalogItemId= 12, Quantity = 4}
 
             };
         }

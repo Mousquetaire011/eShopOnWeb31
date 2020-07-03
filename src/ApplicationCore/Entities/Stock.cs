@@ -7,7 +7,8 @@ namespace Microsoft.eShopWeb.ApplicationCore.Entities
 {
     public class Stock : BaseEntity, IAggregateRoot
     {
-        public int CatalogID { get; set; }
+        public int CatalogItemId { get; set; }
+        public CatalogItem CatalogItem { get; set; }
         public int Quantity { get; set; }
     }
 }
