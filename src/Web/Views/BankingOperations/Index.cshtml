@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    double totalChiffreAffaire = 0;
 }
  <div class="alert-info" style="padding: 40px">
     <h2>FINANCIAL STATS</h2>
@@ -52,9 +53,21 @@
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                 </td>
+        @{
+            totalChiffreAffaire += item.Credit;
+
+        }
             </tr>
     }
         </tbody>
     </table>
+    <div>
+        <h2>Chiffre d'Affaire</h2>
+        <h3><strong>@totalChiffreAffaire</strong> € </h3>
+    </div>
 
+    <div>
+        <h2>Bénéfice attendu</h2>
+        <h3><strong>@totalChiffreAffaire</strong> € </h3>
+    </div>
     </div>

@@ -24,7 +24,8 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // GET: BankingOperations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BankingOperations.ToListAsync());
+            List<BankingOperations> listBankingOperations = _context.BankingOperations.Include(c => c.Order).ToList();
+            return View(listBankingOperations);
         }
 
         // GET: BankingOperations/Details/5
@@ -171,5 +172,16 @@ namespace Microsoft.eShopWeb.Web.Controllers
             }
             return model;
         }
+
+      /*  public double GetCA()
+        {
+            var model = _context.BankingOperations.OrderBy(N => N.BankingDate);
+            double totalCa=0;
+            foreach (var item in model)
+            {
+                totalCa += item.Credit;
+            }
+            return totalCa;
+        }*/
     }
 }

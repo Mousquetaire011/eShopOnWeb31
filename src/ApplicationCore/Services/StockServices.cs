@@ -15,7 +15,7 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
         private readonly IAsyncRepository<CatalogItem> _itemRepository;
         public async Task SetStocksAfterOrder(int stockId, int orderId, int quantity)
         {
-            var order = await _orderRepository.GetByIdAsync(orderId);
+         /*   var order = await _orderRepository.GetByIdAsync(orderId);
             var stocks = await _stockRepository.ListAllAsync();
             var items = new List<CatalogItem>();
             foreach (var item in order.OrderItems)
@@ -23,7 +23,7 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
                 
             }
        
-            await _orderRepository.AddAsync(order);
+            await _orderRepository.AddAsync(order);*/
         }
     }
 }

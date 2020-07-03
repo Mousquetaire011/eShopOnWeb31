@@ -136,7 +136,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
                 return NotFound();
             }
 
-            var stock = await _context.Stock
+            var stock = await _context.Stock.Include(c => c.CatalogItem).Include(s => s.Supplier)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (stock == null)
             {
