@@ -50,7 +50,8 @@ namespace Microsoft.eShopWeb.Web.Controllers
         public IActionResult Create()
         {
            StockViewModel stocks = GetListItem();
-           return View(stocks);
+           StockViewModel model = GetSuppliers(stocks);
+           return View(model);
         }
 
         // POST: Stocks/Create
@@ -167,6 +168,23 @@ namespace Microsoft.eShopWeb.Web.Controllers
                     Text = item.Name,
                     Value = item.Id.ToString()
                 });
+            }
+            return model;
+        }
+
+        public StockViewModel GetSuppliers(StockViewModel model)
+        {
+            model = GetListItem();
+            model.selectListSuppliers = new List<SelectListItem>();
+            var suppliers = _context.Supplier.OrderBy(N => N.Name);
+            foreach (var item in suppliers)
+            {
+                model.selectListSuppliers.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                }) ;
+
             }
             return model;
         }

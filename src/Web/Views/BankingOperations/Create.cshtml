@@ -1,4 +1,4 @@
-﻿@model Microsoft.eShopWeb.ApplicationCore.Entities.BankingOperations
+﻿@model Microsoft.eShopWeb.Web.ViewModels.BankingOperationViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,29 +13,35 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="OperationLabel" class="control-label"></label>
-                    <input asp-for="OperationLabel" class="form-control" />
-                    <span asp-validation-for="OperationLabel" class="text-danger"></span>
+                    <label asp-for="@Model.orders" class="control-label"></label>
+                    <select asp-for="@Model.orders" asp-items="@Model.orders" class="form-control">
+                    </select>
+                    <span asp-validation-for="@Model.orders" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Credit" class="control-label"></label>
-                    <input asp-for="Credit" class="form-control" />
-                    <span asp-validation-for="Credit" class="text-danger"></span>
+                    <label asp-for="@Model.banking.OperationLabel" class="control-label"></label>
+                    <input asp-for="@Model.banking.OperationLabel" class="form-control" />
+                    <span asp-validation-for="@Model.banking.OperationLabel" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Debit" class="control-label"></label>
-                    <input asp-for="Debit" class="form-control" />
-                    <span asp-validation-for="Debit" class="text-danger"></span>
+                    <label asp-for="@Model.banking.Credit" class="control-label"></label>
+                    <input asp-for="@Model.banking.Credit" class="form-control" />
+                    <span asp-validation-for="@Model.banking.Credit" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="OperationDate" class="control-label"></label>
-                    <input asp-for="OperationDate" class="form-control" />
-                    <span asp-validation-for="OperationDate" class="text-danger"></span>
+                    <label asp-for="@Model.banking.Debit" class="control-label"></label>
+                    <input asp-for="@Model.banking.Debit" class="form-control" />
+                    <span asp-validation-for="@Model.banking.Debit" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="BankingDate" class="control-label"></label>
-                    <input asp-for="BankingDate" class="form-control" />
-                    <span asp-validation-for="BankingDate" class="text-danger"></span>
+                    <label asp-for="@Model.banking.OperationDate" class="control-label"></label>
+                    <input asp-for="@Model.banking.OperationDate" class="form-control" />
+                    <span asp-validation-for="@Model.banking.OperationDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.banking.BankingDate" class="control-label"></label>
+                    <input asp-for="@Model.banking.BankingDate" class="form-control" />
+                    <span asp-validation-for="@Model.banking.BankingDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-default" />
@@ -48,6 +54,6 @@
         <a asp-action="Index">Back to List</a>
     </div>
 </div>
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

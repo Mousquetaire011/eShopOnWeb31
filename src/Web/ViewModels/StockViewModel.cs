@@ -12,5 +12,7 @@ namespace Microsoft.eShopWeb.Web.ViewModels
         public Stock stock;
 
         public List<SelectListItem> selectListItems;
+
+        public List<SelectListItem> selectListSuppliers;
     }
 }
