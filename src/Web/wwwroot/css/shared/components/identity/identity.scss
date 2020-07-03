@@ -40,7 +40,7 @@
 
     &:hover &-drop {
         border: $border-light solid $color-foreground-bright;
-        height: 10rem;
+        height: 12rem;
         transition: height $animation-speed-default;
     }
 
