@@ -3,10 +3,16 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<RootNamespace>Microsoft.eShopWeb.ApplicationCore</RootNamespace>
+		<UserSecretsId>9b09b995-d6ce-4f6b-a6a0-690a8a817c52</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ardalis.GuardClauses" Version="1.3.1" />
+	  <Compile Remove="CatalogItem.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.GuardClauses" Version="1.5.0" />
+		<PackageReference Include="EntityFramework" Version="6.4.4" />
 		<PackageReference Include="System.Security.Claims" Version="4.3.0" />
 	</ItemGroup>
 
