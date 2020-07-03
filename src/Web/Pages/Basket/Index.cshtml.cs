@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.eShopWeb.Web.Interfaces;
@@ -15,6 +16,7 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
     public class IndexModel : PageModel
     {
         private readonly IBasketService _basketService;
+        private readonly iStockService _stockService;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private string _username = null;
         private readonly IBasketViewModelService _basketViewModelService;
@@ -43,11 +45,20 @@ namespace Microsoft.eShopWeb.Web.Pages.Basket
             }
             await SetBasketModelAsync().ConfigureAwait(true);
 
-            await _basketService.AddItemToBasket(BasketModel.Id, productDetails.Id, productDetails.Price).ConfigureAwait(true);
+            Stock stock = await _stockService.GetStockByID(productDetails.Id).ConfigureAwait(true);
 
-            await SetBasketModelAsync().ConfigureAwait(true);
+            if (stock.Quantity != 0)
+            {
+                await _basketService.AddItemToBasket(BasketModel.Id, productDetails.Id, productDetails.Price).ConfigureAwait(true);
 
-            return RedirectToPage();
+                await SetBasketModelAsync().ConfigureAwait(true);
+
+                return RedirectToPage();
+            } else
+            {
+                return RedirectToPage("/Index");
+            }
+        
         }
 
         public async Task OnPostUpdate(Dictionary<string, int> items)

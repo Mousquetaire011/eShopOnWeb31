@@ -13,6 +13,7 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
         private readonly IAsyncRepository<Order> _orderRepository;
         private readonly IAsyncRepository<Basket> _basketRepository;
         private readonly IAsyncRepository<CatalogItem> _itemRepository;
+        private readonly IAsyncRepository<Stock> _stockRepository;
 
         public OrderService(IAsyncRepository<Basket> basketRepository,
             IAsyncRepository<CatalogItem> itemRepository,
@@ -30,6 +31,11 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
+                Stock stock = await _stockRepository.GetByIdAsync(item.Id);
+                stock.Quantity -= 1;
+                await _stockRepository.UpdateAsync(stock);
+
+
                 var catalogItem = await _itemRepository.GetByIdAsync(item.CatalogItemId);
                 var itemOrdered = new CatalogItemOrdered(catalogItem.Id, catalogItem.Name, catalogItem.PictureUri);
                 var orderItem = new OrderItem(itemOrdered, item.UnitPrice, item.Quantity);
