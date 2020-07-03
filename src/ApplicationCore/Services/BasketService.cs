@@ -13,6 +13,11 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
         private readonly IAsyncRepository<Basket> _basketRepository;
         private readonly IAppLogger<BasketService> _logger;
 
+        /// <summary>
+        /// Récupère les informations dans des variables en lecture seule pour le traitement
+        /// </summary>
+        /// <param name="basketRepository"></param>
+        /// <param name="logger"></param>
         public BasketService(IAsyncRepository<Basket> basketRepository,
             IAppLogger<BasketService> logger)
         {
@@ -20,6 +25,14 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
             _logger = logger;
         }
 
+        /// <summary>
+        /// Ajoute un item dans le panier, le nombre d'items est à 1 par défaut
+        /// </summary>
+        /// <param name="basketId"></param>
+        /// <param name="catalogItemId"></param>
+        /// <param name="price"></param>
+        /// <param name="quantity"></param>
+        /// <returns></returns>
         public async Task AddItemToBasket(int basketId, int catalogItemId, decimal price, int quantity = 1)
         {
             var basket = await _basketRepository.GetByIdAsync(basketId);
@@ -29,12 +42,22 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
             await _basketRepository.UpdateAsync(basket);
         }
 
+        /// <summary>
+        /// Supprime le panier en cours (et donc son contenu)
+        /// </summary>
+        /// <param name="basketId"></param>
+        /// <returns></returns>
         public async Task DeleteBasketAsync(int basketId)
         {
             var basket = await _basketRepository.GetByIdAsync(basketId);
             await _basketRepository.DeleteAsync(basket);
         }
 
+        /// <summary>
+        /// Retourne le nombre d'items contenus dans le panier d'un utilisateur
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public async Task<int> GetBasketItemCountAsync(string userName)
         {
             Guard.Against.NullOrEmpty(userName, nameof(userName));
@@ -50,6 +73,12 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
             return count;
         }
 
+        /// <summary>
+        /// Modifie la quantité d'un item dans le panier
+        /// </summary>
+        /// <param name="basketId"></param>
+        /// <param name="quantities"></param>
+        /// <returns></returns>
         public async Task SetQuantities(int basketId, Dictionary<string, int> quantities)
         {
             Guard.Against.Null(quantities, nameof(quantities));
