@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Ardalis.GuardClauses;
 using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
 using System;
-using System.Data.Entity;
 using Microsoft.eShopWeb.Infrastructure.Data;
 
 
@@ -17,7 +16,7 @@ namespace Microsoft.eShopWeb.ApplicationCore.Services
         private readonly IAsyncRepository<Order> _orderRepository;
         private readonly IAsyncRepository<Basket> _basketRepository;
         private readonly IAsyncRepository<CatalogItem> _itemRepository;
-        private DbContext _dbContext;
+        private CatalogContext _dbContext;
 
         public OrderService(IAsyncRepository<Basket> basketRepository,
             IAsyncRepository<CatalogItem> itemRepository,
