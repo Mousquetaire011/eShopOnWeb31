@@ -13,7 +13,10 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CatalogItem.Name)
+                       Product
+                    </th>
+                    <th>
+                        Supplier
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Quantity)
@@ -33,6 +36,9 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.CatalogItem.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Name)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Quantity)

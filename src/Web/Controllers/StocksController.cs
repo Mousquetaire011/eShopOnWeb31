@@ -25,7 +25,9 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // GET: Stocks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Stock.ToListAsync());
+            List<Stock> listStock = _context.Stock.Include(c=>c.CatalogItem).Include(s=>s.Supplier).ToList();
+
+            return View(listStock);
         }
 
         // GET: Stocks/Details/5
@@ -59,10 +61,14 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CatalogItemId,Quantity,Buyprice,IsFull,Id")] Stock stock)
+        public async Task<IActionResult> Create(Stock stock)
         {
             if (ModelState.IsValid)
             {
+                var catalogItem = _context.Find<CatalogItem>(stock.SelectedCatalogItemId);
+                var supplier = _context.Find<Supplier>(stock.SelectedSupplierId);
+                stock.CatalogItem = catalogItem;
+                stock.Supplier = supplier;
                 _context.Add(stock);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,7 +97,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CatalogItemId,Quantity,Buyprice,IsFull,Id")] Stock stock)
+        public async Task<IActionResult> Edit(int id, Stock stock)
         {
             if (id != stock.Id)
             {
