@@ -18,5 +18,5 @@ namespace Microsoft.eShopWeb.ApplicationCore.Entities
         public bool IsFull { get; set; } 
     }
 
-
+    
 }

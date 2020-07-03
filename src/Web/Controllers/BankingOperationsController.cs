@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
+using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
 using Microsoft.eShopWeb.Infrastructure.Data;
 using Microsoft.eShopWeb.Web.ViewModels;
 
@@ -56,10 +57,12 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,OperationLabel,Credit,Debit,OperationDate,BankingDate,Id")] BankingOperations bankingOperations)
+        public async Task<IActionResult> Create(BankingOperations bankingOperations)
         {
             if (ModelState.IsValid)
             {
+                var order = _context.Find<Order>(bankingOperations.SelectedOrderId);
+                bankingOperations.Order = order;
                 _context.Add(bankingOperations);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -88,7 +91,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,OperationLabel,Credit,Debit,OperationDate,BankingDate,Id")] BankingOperations bankingOperations)
+        public async Task<IActionResult> Edit(int id, BankingOperations bankingOperations)
         {
             if (id != bankingOperations.Id)
             {
@@ -155,7 +158,6 @@ namespace Microsoft.eShopWeb.Web.Controllers
         public BankingOperationViewModel GetListOrder()
         {
             var model = new BankingOperationViewModel();
-            model.banking = new BankingOperations();
             var items = _context.Orders.OrderBy(N => N.OrderDate);
             model.orders = new List<SelectListItem>();
             foreach (var item in items)

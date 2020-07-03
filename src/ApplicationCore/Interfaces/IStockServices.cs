@@ -7,6 +7,6 @@ namespace Microsoft.eShopWeb.ApplicationCore.Interfaces
 {
     interface IStockServices
     {
-        Task SetStocksAfterOrder(int stockId, int orderId);
+        Task SetStocksAfterOrder(int stockId, int orderId, int quantity);
     }
 }

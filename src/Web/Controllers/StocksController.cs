@@ -15,8 +15,8 @@ namespace Microsoft.eShopWeb.Web.Controllers
     public class StocksController : Controller
     {
         private readonly CatalogContext _context;
-
-        public StocksController(CatalogContext context)
+  
+       public StocksController(CatalogContext context)
         {
             _context = context;
         }
@@ -25,6 +25,7 @@ namespace Microsoft.eShopWeb.Web.Controllers
         // GET: Stocks
         public async Task<IActionResult> Index()
         {
+
             List<Stock> listStock = _context.Stock.Include(c=>c.CatalogItem).Include(s=>s.Supplier).ToList();
 
             return View(listStock);

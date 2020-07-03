@@ -14,7 +14,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="@Model.orders" class="control-label"></label>
-                    <select asp-for="@Model.orders" asp-items="@Model.orders" class="form-control">
+                    <select asp-for="@Model.banking.SelectedOrderId" asp-items="@Model.orders" class="form-control">
                     </select>
                     <span asp-validation-for="@Model.orders" class="text-danger"></span>
                 </div>
