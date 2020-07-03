@@ -9,6 +9,18 @@
         <hr style="border-top-color: gray;"/>
         <dl class="dl-horizontal">
             <dt style="text-align: left;">
+                Product
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CatalogItem.Name)
+            </dd>
+             <dt style="text-align: left;">
+                Supplier
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Supplier.Name)
+            </dd>
+            <dt style="text-align: left;">
                 @Html.DisplayNameFor(model => model.Quantity)
             </dt>
             <dd>
